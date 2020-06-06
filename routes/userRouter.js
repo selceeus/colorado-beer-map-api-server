@@ -32,19 +32,19 @@ userRouter.route('/:userId')
     next();
 })
 .get((req, res) => {
-    res.end(`Will send details of the brewery: ${req.params.breweryId} to you`);
+    res.end(`Will send details of the user: ${req.params.userId} to you`);
 })
 .post((req, res) => {
     res.statusCode = 403;
-    res.end(`Post operation not supported on /users/${req.params.breweryId}`);
+    res.end(`Post operation not supported on /users/${req.params.userId}`);
 })
 .put((req, res) => {
-    res.write(`Updating the user: ${req.params.breweryId}\n`);
+    res.write(`Updating the user: ${req.params.userId}\n`);
     res.end(`Will update the user: ${req.body.name}
         with description: ${req.body.description}`);
 })
 .delete((req, res) => {
-    res.end(`Deleting user: ${req.params.breweryId}`);
+    res.end(`Deleting user: ${req.params.userId}`);
 });
 
 module.exports = userRouter;

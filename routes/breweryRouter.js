@@ -12,17 +12,17 @@ breweryRouter.route('/')
     next();
 })
 .get( (req, res) => {
-    res.end(`Will send all the campsites to you`);
+    res.end(`Will send all the breweries to you`);
 })
 .post((req, res) => {
-    res.end(`Will add the campsites: ${req.body.name} with description: ${req.body.description}`);
+    res.end(`Will add the breweries: ${req.body.name} with description: ${req.body.description}`);
 })
 .put((req, res) => {
     res.statusCode = 403;
-    res.end(`PUT operation not supported on /campsites`);
+    res.end(`PUT operation not supported on /breweries`);
 })
 .delete((req,res) => {
-    res.end('Deleting all campsites');
+    res.end('Deleting all breweries');
 });
 
 breweryRouter.route('/:breweryId')
