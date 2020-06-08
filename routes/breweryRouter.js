@@ -1,50 +1,78 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const Brewery = require('../models/brewery');
 
 const breweryRouter = express.Router();
 
 breweryRouter.use(bodyParser.json());
 
 breweryRouter.route('/')
-.all((req, res, next) => {
-    res.statusCode = 200;
-    res.setHeader('Content-Type', 'text/plain');
-    next();
+.get( (req, res, next) => {
+    Brewery.find()
+    .then(breweries => {
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        res.json(breweries);
+    })
+    .catch(err => next(err));
 })
-.get( (req, res) => {
-    res.end(`Will send all the breweries to you`);
-})
-.post((req, res) => {
-    res.end(`Will add the breweries: ${req.body.name} with description: ${req.body.description}`);
+.post((req, res, next) => {
+    Brewery.create(req.body)
+    .then(breweries => {
+        console.log('Campsite Created', campsite);
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        res.json(breweries);
+    })
+    .catch(err => next(err));
 })
 .put((req, res) => {
     res.statusCode = 403;
     res.end(`PUT operation not supported on /breweries`);
 })
-.delete((req,res) => {
-    res.end('Deleting all breweries');
+.delete((req,res, next) => {
+    Brewery.deleteMany()
+    .then(response => {
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        res.json(response);
+    })
+    .catch(err => next(err));
 });
 
 breweryRouter.route('/:breweryId')
-.all((req, res, next) => {
-    res.statusCode = 200;
-    res.setHeader('Content-Type', 'text/plain');
-    next();
-})
-.get((req, res) => {
-    res.end(`Will send details of the brewery: ${req.params.breweryId} to you`);
+.get((req, res, next) => {
+    Brewery.findById(req.params.breweryId)
+    .then(breweries => {
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        res.json(breweries);
+    })
+    .catch(err => next(err));
 })
 .post((req, res) => {
     res.statusCode = 403;
     res.end(`Post operation not supported on /breweries/${req.params.breweryId}`);
 })
-.put((req, res) => {
-    res.write(`Updating the brewery: ${req.params.breweryId}\n`);
-    res.end(`Will update the brewery: ${req.body.name}
-        with description: ${req.body.description}`);
+.put((req, res, next) => {
+    Brewery.findByIdAndUpdate(req.params.breweryId, {
+        $set: req.body
+    }, { new: true })
+    .then(breweries => {
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        res.json(breweries);
+    })
+    .catch(err => next(err));
 })
-.delete((req, res) => {
-    res.end(`Deleting brewery: ${req.params.breweryId}`);
+.delete((req, res, next) => {
+    Brewery.findByIdAndDelete(req.params.breweryId)
+    .then(response => {
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        res.json(response);
+    })
+    .catch(err => next(err));
 });
 
 module.exports = breweryRouter;

@@ -16,7 +16,7 @@ const port = 3000;
 
 const mongoose = require('mongoose');
 
-const url = 'mongodb://localhost:27017/nucampsite';
+const url = 'mongodb://localhost:27017/coloradobeermap';
 const connect = mongoose.connect(url, {
   useCreateIndex: true,
   useFindAndModify: false,
