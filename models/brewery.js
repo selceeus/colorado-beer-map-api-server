@@ -65,5 +65,4 @@ const brewerySchema = new Schema({
     timestamps: true
 });
 
-const Brewery  = mongoose.model('Brewery', brewerySchema);
-module.exports = Brewery;
+module.exports = mongoose.model('Brewery', brewerySchema);
