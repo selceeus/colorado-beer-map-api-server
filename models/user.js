@@ -33,6 +33,7 @@ const userSchema = new Schema({
         default: false
     },
     favorites: {
+        //Mongoose Population
         type: Array,
         default: false
     },
@@ -41,10 +42,12 @@ const userSchema = new Schema({
         default: false
     },
     post_id: {
+        //Mongoose Population
         type: Array,
         default: false
     },
     comment_id: {
+        //Mongoose Population
         type: Array,
         default: false
     }

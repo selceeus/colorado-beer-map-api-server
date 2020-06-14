@@ -37,6 +37,8 @@ exports.jwtPassport = passport.use(
     )
 );
 
+//Set up Auth for Facebook, Twitter, Google
+
 exports.verifyUser = passport.authenticate('jwt', {session: false});
 
 exports.verifyAdmin = (req, res, next) => {
