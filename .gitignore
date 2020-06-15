@@ -1,2 +1,5 @@
 node_modules
 planning-document.txt
+config.js
+bin/server.cert
+bin/server.key

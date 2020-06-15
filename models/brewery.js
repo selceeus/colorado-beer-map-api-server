@@ -29,8 +29,7 @@ const locationSchema = new Schema({
 const brewerySchema = new Schema({
     name: {
         type: String,
-        required: true,
-        unique: true
+        required: true
     },
     description: {
         type: String,
